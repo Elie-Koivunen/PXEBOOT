@@ -1,0 +1,69 @@
+# install packages
+yum install dhcp tftp tftp-server syslinux vsftpd xinetd
+
+# configure DHCP
+# follow instructions under DNS+DHCP project
+
+# configure tftp
+vi /etc/xinetd.d/tftp
+service tftp
+{
+ socket_type = dgram
+ protocol    = udp
+ wait        = yes
+ user        = root
+ server      = /usr/sbin/in.tftpd
+ server_args = -s /var/lib/tftpboot
+ disable     = no
+ per_source  = 11
+ cps         = 100 2
+ flags       = IPv4
+}
+
+# copy network boot files
+cp -v /usr/share/syslinux/pxelinux.0 /var/lib/tftpboot
+cp -v /usr/share/syslinux/menu.c32 /var/lib/tftpboot
+cp -v /usr/share/syslinux/memdisk /var/lib/tftpboot
+cp -v /usr/share/syslinux/mboot.c32 /var/lib/tftpboot
+cp -v /usr/share/syslinux/chain.c32 /var/lib/tftpboot
+mkdir /var/lib/tftpboot/pxelinux.cfg
+mkdir /var/lib/tftpboot/networkboot
+
+# mount centos installation image
+mkdir /mnt/cdrom
+mount /dev/cdrom /mnt/cdrom/
+
+# copy files
+cd /mnt/cdrom
+cp -av * /var/ftp/pub/
+
+# copy kernel files
+cp /mnt/cdrom/images/pxeboot/vmlinuz /var/lib/tftpboot/networkboot/
+cp /mnt/cdrom/images/pxeboot/initrd.img /var/lib/tftpboot/networkboot/
+
+# umount cdrom
+cd /
+umount /mnt/cdrom
+df -h
+
+# copy kickstart files from kickstart project on github to /var/ftp/pub
+
+# copy pxe boot menu from to vi /var/lib/tftpboot/pxelinux.cfg/default
+
+# start services
+systemctl start xinetd
+systemctl enable xinetd
+systemctl start dhcpd.service # in case not already running
+systemctl enable dhcpd.service # in case not already enabled
+systemctl start vsftpd
+systemctl start vsftpd
+
+# ensure selinux is disabled
+# ensure there are no firewall rules blocking access
+
+
+
+
+
+
+
