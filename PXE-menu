@@ -24,21 +24,21 @@ LABEL Install Minimal CentOS 7_x64
         MENU INDENT 5
         KERNEL /networkboot/vmlinuz
         APPEND initrd=/networkboot/initrd.img inst.repo=ftp://192.168.255.5/pub ks=ftp://192.168.255.5/pub/centos7.cfg
-        MENU SEPARATOR
+#        MENU SEPARATOR
 
 LABEL Install K8S CentOS 7_x64
         MENU LABEL Install K8S CentOS 7_x64
         MENU INDENT 5
         KERNEL /networkboot/vmlinuz
         APPEND initrd=/networkboot/initrd.img inst.repo=ftp://192.168.255.5/pub ks=ftp://192.168.255.5/pub/centos7-k8s.cfg
-        MENU SEPARATOR
+#        MENU SEPARATOR
 
 LABEL Install K8S master CentOS 7_x64
         MENU LABEL Install K8S master CentOS 7_x64
         MENU INDENT 5
         KERNEL /networkboot/vmlinuz
         APPEND initrd=/networkboot/initrd.img inst.repo=ftp://192.168.255.5/pub ks=ftp://192.168.255.5/pub/centos7-k8s-master.cfg
-        MENU SEPARATOR
+#        MENU SEPARATOR
 
 
 LABEL Rescue (CentOS 7_x64)
@@ -46,7 +46,7 @@ LABEL Rescue (CentOS 7_x64)
         MENU INDENT 5
         KERNEL /networkboot/vmlinuz
         APPEND initrd=/networkboot/initrd.img ramdisk_size=10000 text rescue ks=ftp://192.168.255.5/pub/centos7.cfg
-        MENU SEPARATOR
+#        MENU SEPARATOR
 
 LABEL Wipe local drives (DBAN)
         MENU Wipe local drives (DBAN)
