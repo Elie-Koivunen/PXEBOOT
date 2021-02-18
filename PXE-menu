@@ -51,5 +51,5 @@ LABEL Rescue (CentOS 7_x64)
 LABEL Wipe local drives (DBAN)
         MENU Wipe local drives (DBAN)
         MENU INDENT 5
-        KERNEL dban.bzi
+        KERNEL /dban/dban.bzi
         APPEND nuke="dwipe --autonuke --verify=0 --method=quick zero" silent
