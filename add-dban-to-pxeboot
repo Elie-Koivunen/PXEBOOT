@@ -1,1 +1,8 @@
-.
+ wget -O /tmp/dban.iso https://sourceforge.net/projects/dban/files/dban/dban-2.3.0/dban-2.3.0_i586.iso/download
+ mkdir /mnt/iso
+ mount -o loop /tmp/dban.iso /mnt/iso
+ cd /mnt/iso/
+ cd /var/lib/tftpboot/
+ mkdir dban
+ cp /mnt/iso/* /var/lib/tftpboot/dban/
+ umount /mnt/iso
